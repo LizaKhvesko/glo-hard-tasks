@@ -1,16 +1,18 @@
-let shortExpr = function(expr) {
-    if(typeof expr !== 'string') {
-        alert('Неверный тип данных');
-    }
-    else {
-        expr = expr.trim();
-        if(expr.length>30) {
-            expr = expr.substring(0, 30) + "..."
-        }
-        return expr;
+let arr = ['12345', '23456', '34567', '45678', '573567', '56753', '4332456'];
+for (let i=0; i<arr.length; i++) {
+    if(arr[i][0] === '2' || arr[i][0] === '4') {
+        console.log(arr[i]);
+    } else {
+        continue;
     }
 }
 
-console.log(shortExpr(1234));
-console.log(shortExpr('Здравствуйте, Виталий!'));
-console.log(shortExpr('   Здравствуйте, Виталий! Как ваши дела?   '));
+number:
+for (let i = 2; i <= 100; i++) { 
+
+  for (let j = 2; j < i; j++) { 
+    if (i % j == 0) continue number; 
+  }
+
+  console.log( i + ` Делители этого числа 1 и ${i}` ); 
+}

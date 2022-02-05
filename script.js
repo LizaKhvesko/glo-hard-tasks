@@ -1,18 +1,29 @@
-let arr = ['12345', '23456', '34567', '45678', '573567', '56753', '4332456'];
-for (let i=0; i<arr.length; i++) {
-    if(arr[i][0] === '2' || arr[i][0] === '4') {
-        console.log(arr[i]);
-    } else {
-        continue;
-    }
+let first = document.querySelector('.first');
+let second = document.querySelector('.second');
+let week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+let today = new Date();
+let weekIndex = today.getDay();
+
+for (let i = 0; i < week.length; i++) {
+  let span = document.createElement('span');
+  span.textContent = week[i] + ' ';
+  if (i === 0 || i === 6) {
+    span.style.fontWeight = '900';
+  }
+  if (i === weekIndex) {
+     span.style.fontStyle = 'italic';
+  }
+  first.append(span);
 }
 
-number:
-for (let i = 2; i <= 100; i++) { 
-
-  for (let j = 2; j < i; j++) { 
-    if (i % j == 0) continue number; 
+for (let i = 0; i < week.length; i++) {
+  let p = document.createElement('p');
+  p.textContent = week[i];
+  if (i === 0 || i === 6) {
+    p.style.fontWeight = '900';
   }
-
-  console.log( i + ` Делители этого числа 1 и ${i}` ); 
+  if (i === weekIndex) {
+     p.style.fontStyle = 'italic';
+  }
+  second.append(p);
 }

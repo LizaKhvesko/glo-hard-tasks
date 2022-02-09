@@ -1,58 +1,31 @@
-function updateTime() {
-  let first = document.querySelector('.first');
-  let second = document.querySelector('.second');
-  let week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-  let months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-  let today = new Date();
-  let weekIndex = today.getDay();
-  let year = today.getFullYear();
-  let monthIndex = today.getMonth();
-  let day = today.getDate();
-  let hour = today.getHours();
-  let minutes = today.getMinutes();
-  let seconds = today.getSeconds();
-  let wordM = 'минут';
-  let wordS = 'секунд';
+const body = document.querySelector('body');
+const books = document.querySelectorAll('.book');
+const adv = document.querySelector('.adv');
+const title3 = books[4].querySelector('a');
+const chapter7 = books[2].querySelector('li:nth-child(9)');
+const list2 = books[0].querySelectorAll('li');
+const list5 = books[5].querySelectorAll('li');
 
-  function addTail(number) {
-    let str = String(number);
-    if(number !== 11 && str[str.length-1] === '1') {
-      return 'а';
-    } else if ((number < 10 || number > 20) && (str[str.length-1] === '2' || str[str.length-1] === '3' || str[str.length-1] === '4')) {
-      return 'ы';
-    } else {
-      return '';
-    }
-  }
+books[0].before(books[1]);
+books[5].after(books[2]);
+books[0].after(books[4]);
 
-  function hourWord (hour) {
-    if (hour === 1 || hour === 21) {
-      return 'час';
-    } else if (hour === 2 || hour === 3 || hour === 4 || hour === 22 || hour === 23) {
-      return 'часа';
-    } else {
-      return 'часов';
-    }
-  }
+body.style.backgroundImage = 'url(./image/adv.jpg)';
 
-  function addZero(number) {
-    if (String(number).length === 1) {
-      number = '0' + number;
-    }
-    return number;
-  }
+title3.textContent = 'Книга 3. this и Прототипы Объектов';
 
-  let wordH = hourWord(hour);
-  wordM += addTail(minutes);
-  wordS += addTail(seconds)
-  first.textContent = `Сегодня ${week[weekIndex]}, ${day} ${months[monthIndex]} ${year} года, ${hour} ${wordH} ${minutes} ${wordM} ${seconds} ${wordS}`;
+adv.remove();
 
-  monthIndex = addZero(monthIndex);
-  day = addZero(day);
-  hour = addZero(hour);
-  minutes = addZero(minutes);
-  seconds = addZero(seconds);
-  second.textContent = `${day}.${monthIndex}.${year} - ${hour}:${minutes}:${seconds}`;
-}
+const chapter8 = document.createElement('li');
+chapter8.textContent = 'Глава 8: За пределами ES6';
+chapter7.after(chapter8);
 
-setInterval(updateTime, 1000);
+list2[9].after(list2[2]);
+list2[3].after(list2[6]);
+list2[6].after(list2[8]);
+
+list5[1].after(list5[9]);
+list5[4].after(list5[2]);
+list5[8].before(list5[5]);
+
+

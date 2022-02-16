@@ -1,31 +1,61 @@
-const body = document.querySelector('body');
-const books = document.querySelectorAll('.book');
-const adv = document.querySelector('.adv');
-const title3 = books[4].querySelector('a');
-const chapter7 = books[2].querySelector('li:nth-child(9)');
-const list2 = books[0].querySelectorAll('li');
-const list5 = books[5].querySelectorAll('li');
+const DomElement = function(selector, height, width, fontSize, text, bg, color, position){
+    this.selector = selector;
+    this.height = height;
+    this.width = width;
+    this.fontSize = fontSize;
+    this.bg = bg;
+    this.color = color;
+    this.position = position;
+    this.text = text;
+    this.create = function() {
+        if(this.selector[0] === '.') {
+            let newElement = document.createElement('div');
+            newElement.classList.add(this.selector.slice(1));
+            newElement.style.cssText = `height: ${this.height};
+            width: ${this.width};
+            background-image: ${this.bg};
+            font-size: ${this.fontSize};
+            background-color: ${this.color};
+            position: ${this.position};
+            `
+            newElement.textContent = this.text;
+            document.querySelector('body').append(newElement);
+        } else if (this.selector[0] === '#') {
+            let newElement = document.createElement('p');
+            newElement.id = this.selector;
+            newElement.style.cssText = `height: ${this.height};
+            width: ${this.width};
+            background-image: ${this.bg};
+            font-size: ${this.fontSize};
+            background-color: ${this.color};
+            position: ${this.position};`
+            newElement.textContent = this.text;
+            document.querySelector('body').append(newElement);
+        }
+    }
+}
 
-books[0].before(books[1]);
-books[5].after(books[2]);
-books[0].after(books[4]);
+function move (event) {
+    let square = document.querySelector('.square');
+    switch(event.key) {
+        case 'ArrowUp': square.style.top = (square.getBoundingClientRect().top - 10) + 'px';
+        break;
+        case 'ArrowRight': square.style.left = (square.getBoundingClientRect().left + 10) + 'px';
+        break;
+        case 'ArrowDown': square.style.top = (square.getBoundingClientRect().top + 10) + 'px';
+        break;
+        case 'ArrowLeft': square.style.left = (square.getBoundingClientRect().left - 10) + 'px';;
+        break;
+    }
+}
 
-body.style.backgroundImage = 'url(./image/adv.jpg)';
+const newObj1 = new DomElement('.block', '100px', '200px', '15px', 'JS make me cry', 'url(image/color.jpeg)');
+const newObj2 = new DomElement('#best', '200px', '300px', '25px', 'Too hard for understanding', 'url(image/color2.jpeg)');
+const square = new DomElement('.square', '100px', '100px', '','', '','yellow', 'absolute');
 
-title3.textContent = 'Книга 3. this и Прототипы Объектов';
-
-adv.remove();
-
-const chapter8 = document.createElement('li');
-chapter8.textContent = 'Глава 8: За пределами ES6';
-chapter7.after(chapter8);
-
-list2[9].after(list2[2]);
-list2[3].after(list2[6]);
-list2[6].after(list2[8]);
-
-list5[1].after(list5[9]);
-list5[4].after(list5[2]);
-list5[8].before(list5[5]);
-
-
+newObj1.create();
+newObj2.create();
+document.addEventListener('DOMContentLoaded', function(event) {
+    square.create();
+})
+document.addEventListener('keydown', move);

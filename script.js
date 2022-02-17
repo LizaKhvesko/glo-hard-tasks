@@ -11,27 +11,23 @@ const DomElement = function(selector, height, width, fontSize, text, bg, color, 
         if(this.selector[0] === '.') {
             let newElement = document.createElement('div');
             newElement.classList.add(this.selector.slice(1));
-            newElement.style.cssText = `height: ${this.height};
-            width: ${this.width};
-            background-image: ${this.bg};
-            font-size: ${this.fontSize};
-            background-color: ${this.color};
-            position: ${this.position};
-            `
-            newElement.textContent = this.text;
+            this.cssText(newElement);
             document.querySelector('body').append(newElement);
         } else if (this.selector[0] === '#') {
             let newElement = document.createElement('p');
             newElement.id = this.selector;
-            newElement.style.cssText = `height: ${this.height};
+            this.cssText(newElement);
+            document.querySelector('body').append(newElement);
+        }
+    }
+    this.cssText = function(elem) {
+        elem.style.cssText = `height: ${this.height};
             width: ${this.width};
             background-image: ${this.bg};
             font-size: ${this.fontSize};
             background-color: ${this.color};
             position: ${this.position};`
-            newElement.textContent = this.text;
-            document.querySelector('body').append(newElement);
-        }
+            elem.textContent = this.text;
     }
 }
 

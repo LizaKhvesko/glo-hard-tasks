@@ -1,24 +1,13 @@
-#school,
-#main,
-#teacherSelect,
-#name,
-#age,
-#educ, 
-.workday,
-button {
-    margin-bottom: 10px;
+body{
+    position: relative;
 }
 
-table{
-    border: 3px solid black;
-    border-collapse: collapse;
+.square{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #ffff00;
     margin-bottom: 20px;
+    margin-top: 30px;
 }
-
-th, td{
-    border: 1px solid black;
-    padding: 5px;
-}
-
-
 

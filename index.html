@@ -10,35 +10,11 @@
 </head>
 <body>
     <form action="" method="post">
-        <label for="school"> Номер школы
-        <input type="number" id="school" required>
-        </label><br>
-        <label for="name"> Имя преподавателя 
-        <input type="text" id="name"></label><br>
-        <label for="age"> Возраст преподавателя
-        <input type="number" id="age" required>
-        </label><br>
-        <label>Является ли классным руководителем?</label>
-        <input type="checkbox" value="true" name="yes" id="main"> Да  
-        <br>
-        <select name="teacher" required id="teacherSelect">
-            <option selected name="type" value="none">Выберите учителя</option>
-            <option name="rus" value="russian">Учитель русского</option>
-            <option name="geo" value="geografy">Учитель географии</option>
-        </select> <br>
-        <label for="educ"> Образование: 
-        <input type="text" id="educ"></label><br>
-        <div class="workday">
-             <input type="checkbox" value="понедельник" name="mon" class="day"> Пн
-             <input type="checkbox" value="вторник" name="tue" class="day"> Вт 
-             <input type="checkbox" value="среда" name="wed" class="day"> Ср 
-             <input type="checkbox" value="четверг" name="thur" class="day"> Чт 
-             <input type="checkbox" value="пятница" name="fri" class="day"> Пт    
-        </div>
-        <button type="submit" id="save">Сохнанить</button>
+        <label for="text">Введите текст
+            <input type="text">
+        </label>
     </form>
-
-    <div class="tables"> </div>
+    <p class="result"></p>
 <script src="script.js"></script>
 </body>
 </html>

@@ -1,43 +1,48 @@
-let squareBody = document.querySelector('.square-body');
-let blocks = document.querySelectorAll('.block');
-let btnReset = document.querySelector('.btn-reset');
+const select = document.querySelector('select');
+const text = document.querySelector('.text');
+const price = document.querySelector('.price');
 
-squareBody.addEventListener('click', (e) => {
-    let index;
-    for (let i = 0; i < blocks.length; i++) {
-        if(blocks[i] === e.target.closest('.block')) {
-            index = i;
-            break;
-        }
+const getData = (url) => {
+    return fetch(url)
+        .then(response => response.json())
+        .then(data => data)
+        .catch(error => console.log(error))
+}
+
+getData('../db.json')
+        .then(data => {
+            select.innerHTML = '<option name="choose" value="choose">Выберите машину</option>';
+            for (let i = 0; i < data.cars.length; i++) {
+            select.innerHTML += `<option name="${data.cars[i].brand}" value="${i}">${data.cars[i].brand}</option>`; 
+            }
+        })
+select.addEventListener('change', () => {
+    getData('../db.json')
+        .then(data => {
+            let selectValue= select.options[select.selectedIndex].value;
+            if (selectValue === 'choose') {
+                text.textContent = 'Пожалуйста, сделайте свой выбор!';
+                price.textContent = '';
+            } else {
+                text.textContent = `Машина: ${data.cars[selectValue].brand} ${data.cars[selectValue].model}`;
+                price.textContent =  `Цена: ${data.cars[selectValue].price}`;
+            }
+        })
+})
+
+/*
+const createSelect = (data) => {
+    select.innerHTML = '<option name="choose" value="choose">Выберите машину</option>';
+    for (let i = 0; i < data.cars.length; i++) {
+       select.innerHTML += `<option name="${data.cars[i].brand}" value="${data.cars[i].brand}">${data.cars[i].brand}</option>`; 
     }
-    let targetBlock = blocks[index].querySelector('.block-number');
-    let text = targetBlock.textContent;
-    let blockTop, blockDown, blockRight, blockLeft
+}
 
-    index > 4 ?  blockTop = blocks[index-5].querySelector('.block-number') : blockTop = targetBlock;
-    index < 20 ? blockDown = blocks[index+5].querySelector('.block-number') : blockDown = targetBlock;
-    index > 0 ? blockLeft = blocks[index-1].querySelector('.block-number') : blockLeft = targetBlock;
-    index < 24 ? blockRight = blocks[index+1].querySelector('.block-number') : blockRight = targetBlock;
-
-    function move(element) {
-        targetBlock.textContent = element.textContent;
-        element.textContent = text;
-        blocks = document.querySelectorAll('.block');
-    }
+const makeChose = () => {
+    select.addEventListener('change', async () => {
+        let selectIndex = select.options[select.selectedIndex].value;
         
-        if (e.target.closest('.left')) {
-           move(blockLeft);
-        } else  if(e.target.closest('.right')) {
-           move(blockRight);
-        } else if (e.target.closest('.top')) {
-           move(blockTop);
-        } else if(e.target.closest('.bottom')) {
-           move(blockDown);
-        }
-})
-
-btnReset.addEventListener('click', () => {
-    blocks.forEach((block, index) => {
-        block.querySelector('.block-number').textContent = index+1;
     })
-})
+
+}
+*/
